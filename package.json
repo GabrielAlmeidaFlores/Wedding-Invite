@@ -1,0 +1,20 @@
+{
+  "name": "projeto-casamento",
+  "version": "0.0.0",
+  "private": true,
+  "packageManager": "yarn@4.5.0",
+  "engines": {
+    "node": ">=20"
+  },
+  "workspaces": [
+    "apps/*"
+  ],
+  "scripts": {
+    "dev": "yarn workspace @app/web dev",
+    "build": "yarn workspace @app/web build",
+    "preview": "yarn workspace @app/web preview",
+    "lint": "yarn workspace @app/web lint",
+    "typecheck": "yarn workspace @app/web typecheck",
+    "test": "yarn workspace @app/web test"
+  }
+}

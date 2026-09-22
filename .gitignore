@@ -1,0 +1,14 @@
+node_modules
+.serverless
+dist
+coverage
+.DS_Store
+.yarn/cache
+.yarn/install-state.gz
+.yarn/unplugged
+.yarn/build-state.yml
+.pnp.*
+*.local
+.env
+.env.*
+!.env.example
