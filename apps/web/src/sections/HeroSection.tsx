@@ -26,6 +26,9 @@ export function HeroSection() {
               alt={`${wedding.bride} e ${wedding.groom}`}
             />
           </h1>
+          <p className="hero-date">
+            <time dateTime={wedding.dateTimeIso}>{wedding.dateLabel}</time>
+          </p>
           <a className="scroll-cue" href="#casamento">
             <span className="scroll-cue-arrow" aria-hidden="true">
               ↓

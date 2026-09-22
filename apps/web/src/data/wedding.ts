@@ -54,7 +54,6 @@ export type WeddingContent = {
     title: string;
     lede: string;
     mapsLabel: string;
-    calendarAddLabel: string;
   };
   dressCode: {
     eyebrow: string;
@@ -164,7 +163,6 @@ export const wedding: WeddingContent = {
     title: 'O casamento',
     lede: 'Tudo o que você precisa para chegar com calma e celebrar conosco.',
     mapsLabel: 'Como chegar',
-    calendarAddLabel: 'Adicionar ao calendário',
   },
   dressCode: {
     eyebrow: 'Traje',

@@ -1,38 +1,43 @@
-import { wedding } from '@/data/wedding';
-import { buildCalendarIcs } from '@/lib/calendar-event';
+import { wedding, type WeddingPlace } from '@/data/wedding';
+import { padUnit } from '@/lib/countdown';
 import { mapsLink } from '@/lib/maps';
+import { useCountdown } from '@/hooks/use-countdown';
 import { useReveal } from '@/hooks/use-reveal';
 import { Button } from '@/components/Button';
-import { CalendarSketch } from '@/components/CalendarSketch';
-import { Icon } from '@/components/Icon';
+import { CheersArt, ChurchArt, PlaceDivider } from '@/components/PlaceArt';
 import { SectionHeading } from '@/components/SectionHeading';
 
-function saveWeddingCalendar(): void {
-  const ceremony = wedding.places[0];
-  const reception = wedding.places[1];
-  if (!ceremony) return;
+const COUNTDOWN_UNITS = [
+  { key: 'days', label: 'Dias' },
+  { key: 'hours', label: 'Horas' },
+  { key: 'minutes', label: 'Minutos' },
+  { key: 'seconds', label: 'Segundos' },
+] as const;
 
-  const receptionLine = reception
-    ? ` Recepção ${reception.when.charAt(0).toLowerCase()}${reception.when.slice(1)} no ${reception.name}, ${reception.address}.`
-    : '';
-  const ics = buildCalendarIcs(
-    {
-      title: `Casamento de ${wedding.bride} e ${wedding.groom}`,
-      startIso: wedding.dateTimeIso,
-      durationHours: 2,
-      location: `${ceremony.name}, ${ceremony.address}`,
-      description: `Cerimônia ${ceremony.when} na ${ceremony.name}, ${ceremony.address}.${receptionLine}`,
-      uid: 'casamento-geisa-vitoria-joao-gabriel-20280520',
-    },
-    new Date(),
+function WeddingCountdown() {
+  const remaining = useCountdown(wedding.dateTimeIso);
+
+  if (remaining.isPast) {
+    return <p className="countdown-done">{wedding.hero.countdownFinished}</p>;
+  }
+
+  const spoken = `${remaining.days} dias, ${remaining.hours} horas, ${remaining.minutes} minutos e ${remaining.seconds} segundos`;
+
+  return (
+    <div className="countdown" role="timer" aria-label={spoken}>
+      {COUNTDOWN_UNITS.map((unit) => (
+        <div className="countdown-item" key={unit.key}>
+          <strong>{padUnit(remaining[unit.key])}</strong>
+          <span>{unit.label}</span>
+        </div>
+      ))}
+    </div>
   );
-  const file = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
-  const url = URL.createObjectURL(file);
-  const link = document.createElement('a');
-  link.href = url;
-  link.download = 'casamento-geisa-e-joao-gabriel.ics';
-  link.click();
-  URL.revokeObjectURL(url);
+}
+
+function PlaceMark({ icon }: { icon: WeddingPlace['icon'] }) {
+  if (icon === 'cheers') return <CheersArt />;
+  return <ChurchArt />;
 }
 
 export function WeddingSection() {
@@ -52,39 +57,32 @@ export function WeddingSection() {
           lede={wedding.wedding.lede}
           ornament="flower"
         />
-        <dl className="info-grid">
-          <div className="info-item info-calendar">
-            <button type="button" className="calendar-add" onClick={saveWeddingCalendar}>
-              <span className="calendar-art">
-                <CalendarSketch />
-                <img className="calendar-sheet" src="/images/elementos/calendario.svg" alt="" />
-              </span>
-              <span className="calendar-add-label">{wedding.wedding.calendarAddLabel}</span>
-            </button>
-          </div>
-          {wedding.places.map((place) => (
-            <div className="info-item place-card" key={place.id}>
-              <Icon name={place.icon} />
-              <dt>{place.label}</dt>
-              <dd className="place-when">
-                {place.when.split(' | ').map((part) => (
-                  <span key={part}>{part}</span>
-                ))}
-              </dd>
-              <dd className="place-name">{place.name}</dd>
-              <dd className="place-address">{place.address}</dd>
-              <div className="place-actions">
-                <Button
-                  href={mapsLink(`${place.name}, ${place.address}`, '')}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  {wedding.wedding.mapsLabel}
-                </Button>
+        <div className="celebration">
+          <WeddingCountdown />
+          <div className="place-row">
+            {wedding.places.map((place) => (
+              <div className="place-block" key={place.id}>
+                <PlaceDivider />
+                <div className="place-card">
+                  <PlaceMark icon={place.icon} />
+                  <h3 className="place-label">{place.label}</h3>
+                  <p className="place-when">{place.when}</p>
+                  <p className="place-name">{place.name}</p>
+                  <p className="place-address">{place.address}</p>
+                  <div className="place-actions">
+                    <Button
+                      href={mapsLink(`${place.name}, ${place.address}`, '')}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      {wedding.wedding.mapsLabel}
+                    </Button>
+                  </div>
+                </div>
               </div>
-            </div>
-          ))}
-        </dl>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );
