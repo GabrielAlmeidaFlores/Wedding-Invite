@@ -11,20 +11,13 @@ export function DressCodeSection() {
       <div className="container">
         <div className="dress-layout">
           <div>
-            <SectionHeading titleId="dress-code-title" eyebrow={dressCode.eyebrow} title={dressCode.title} />
+            <SectionHeading titleId="dress-code-title" eyebrow={dressCode.eyebrow} ornament="none" />
             <p className="dress-name">{dressCode.name}</p>
-            <p className="lede dress-copy">{dressCode.description}</p>
-          </div>
-          <div>
-            <p className="palette-label">{dressCode.paletteLabel}</p>
-            <ul className="swatches">
-              {dressCode.colors.map((color) => (
-                <li key={color.hex}>
-                  <span className="swatch" style={{ backgroundColor: color.hex }} aria-hidden="true" />
-                  <span className="swatch-name">{color.name}</span>
-                </li>
-              ))}
-            </ul>
+            {dressCode.description.map((paragraph) => (
+              <p className="lede dress-copy" key={paragraph}>
+                {paragraph}
+              </p>
+            ))}
           </div>
         </div>
         {dressCode.references.length > 0 ? (
@@ -40,6 +33,7 @@ export function DressCodeSection() {
           </div>
         ) : null}
       </div>
+      <img className="dress-simba" src="/images/elementos/simba1.png" alt="" />
     </section>
   );
 }

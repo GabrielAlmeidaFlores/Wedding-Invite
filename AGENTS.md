@@ -524,8 +524,9 @@ nunca regra de negócio.
 
 ### 23.1 Identidade e nomes canônicos
 
-- Nome do projeto (placeholder até o projeto real ser nomeado): `projeto-serverless`.
-  Ao renomear, substituir globalmente e atualizar esta seção.
+- Nome do produto: `Enlace - Uma experiência Kyber`.
+- Identificador técnico usado nos exemplos de scaffolding desta seção: `projeto-serverless`
+  (service, workspaces, prefixo AWS e namespace de métricas abaixo). Não é o nome público.
 - Service Serverless: `projeto-serverless-api`.
 - Workspaces npm/yarn:
   - Raiz: `projeto-serverless` (privado, só orquestra workspaces).

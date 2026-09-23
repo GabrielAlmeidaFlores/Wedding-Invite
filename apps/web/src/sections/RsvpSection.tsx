@@ -65,7 +65,13 @@ export function RsvpSection() {
   return (
     <section className="section section-rsvp" id="rsvp" aria-labelledby="rsvp-title" ref={ref}>
       <div className="container container-form">
-        <SectionHeading titleId="rsvp-title" eyebrow={copy.eyebrow} title={copy.title} lede={copy.lede} />
+        <SectionHeading
+          titleId="rsvp-title"
+          eyebrow={copy.eyebrow}
+          title={copy.title}
+          lede={copy.lede}
+          ornament="none"
+        />
         {status === 'success' ? (
           <div className="rsvp-success" role="status">
             <p>{confirmedPresence === 'yes' ? copy.successYes : copy.successNo}</p>

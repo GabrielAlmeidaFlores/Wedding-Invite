@@ -2,11 +2,11 @@ import { Ornament } from '@/components/Ornament';
 
 type SectionHeadingProps = {
   eyebrow?: string;
-  title: string;
+  title?: string;
   lede?: string;
   align?: 'start' | 'center';
   titleId: string;
-  ornament?: 'line' | 'flower';
+  ornament?: 'line' | 'flower' | 'none';
 };
 
 export function SectionHeading({
@@ -19,9 +19,13 @@ export function SectionHeading({
 }: SectionHeadingProps) {
   return (
     <div className={align === 'center' ? 'heading heading-center' : 'heading'}>
-      <Ornament variant={ornament} />
-      {eyebrow ? <p className="eyebrow">{eyebrow}</p> : null}
-      <h3 id={titleId}>{title}</h3>
+      {ornament === 'none' ? null : <Ornament variant={ornament} />}
+      {eyebrow ? (
+        <p className="eyebrow" id={title ? undefined : titleId}>
+          {eyebrow}
+        </p>
+      ) : null}
+      {title ? <h3 id={titleId}>{title}</h3> : null}
       {lede ? <p className="lede">{lede}</p> : null}
     </div>
   );

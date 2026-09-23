@@ -17,7 +17,14 @@ export function AlbumSection() {
   return (
     <section className="section section-album" id="album" aria-labelledby="album-title" ref={ref}>
       <div className="container">
-        <SectionHeading align="center" titleId="album-title" eyebrow={copy.eyebrow} title={copy.title} lede={copy.text} />
+        <SectionHeading
+          align="center"
+          titleId="album-title"
+          eyebrow={copy.eyebrow}
+          title={copy.title}
+          lede={copy.text}
+          ornament="none"
+        />
         <div className="section-actions">
           <Button type="button" onClick={() => inputRef.current?.click()}>
             <Icon name="image" />

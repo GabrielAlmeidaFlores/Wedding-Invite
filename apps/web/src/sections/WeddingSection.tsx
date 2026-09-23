@@ -55,7 +55,7 @@ export function WeddingSection() {
           eyebrow={wedding.wedding.eyebrow}
           title={wedding.wedding.title}
           lede={wedding.wedding.lede}
-          ornament="flower"
+          ornament="none"
         />
         <div className="celebration">
           <WeddingCountdown />

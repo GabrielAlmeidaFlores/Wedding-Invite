@@ -16,17 +16,13 @@ export function GiftsSection() {
           eyebrow={gifts.eyebrow}
           title={gifts.title}
           lede={gifts.text}
+          ornament="flower"
         />
         <div className="section-actions">
-          {gifts.url ? (
-            <Button href={gifts.url} target="_blank" rel="noreferrer">
-              {gifts.button}
-            </Button>
-          ) : (
-            <Button type="button">{gifts.button}</Button>
-          )}
+          <Button href="/presentes">{gifts.button}</Button>
         </div>
       </div>
+      <img className="gifts-present" src="/images/elementos/presente.png" alt="" />
     </section>
   );
 }

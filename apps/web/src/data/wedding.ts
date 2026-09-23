@@ -11,11 +11,6 @@ export type ImageAsset = {
   alt: string;
 };
 
-export type PaletteColor = {
-  name: string;
-  hex: string;
-};
-
 export type NavItem = {
   id: string;
   href: string;
@@ -29,6 +24,13 @@ export type WeddingPlace = {
   when: string;
   name: string;
   address: string;
+};
+
+export type GiftItem = {
+  id: string;
+  name: string;
+  priceCents: number;
+  image?: ImageAsset;
 };
 
 export type WeddingContent = {
@@ -57,12 +59,9 @@ export type WeddingContent = {
   };
   dressCode: {
     eyebrow: string;
-    title: string;
     name: string;
-    description: string;
-    paletteLabel: string;
+    description: readonly string[];
     referencesTitle: string;
-    colors: readonly PaletteColor[];
     references: readonly ImageAsset[];
   };
   gifts: {
@@ -71,6 +70,7 @@ export type WeddingContent = {
     text: string;
     button: string;
     url: string;
+    items: readonly GiftItem[];
   };
   rsvp: {
     eyebrow: string;
@@ -146,8 +146,8 @@ export const wedding: WeddingContent = {
   navigation: [
     { id: 'inicio', href: '#inicio', label: 'Início' },
     { id: 'casamento', href: '#casamento', label: 'O Casamento' },
-    { id: 'dress-code', href: '#dress-code', label: 'Dress Code' },
-    { id: 'presentes', href: '#presentes', label: 'Presentes' },
+    { id: 'dress-code', href: '#dress-code', label: 'O que vestir' },
+    { id: 'presentes', href: '/presentes', label: 'Presentes' },
     { id: 'rsvp', href: '#rsvp', label: 'RSVP' },
     { id: 'album', href: '#album', label: 'Álbum' },
   ],
@@ -165,20 +165,13 @@ export const wedding: WeddingContent = {
     mapsLabel: 'Como chegar',
   },
   dressCode: {
-    eyebrow: 'Traje',
-    title: 'Dress Code',
-    name: '[NOME DO TRAJE]',
-    description:
-      'Pedimos um visual elegante e confortável, em harmonia com a paleta desta celebração.',
-    paletteLabel: 'Paleta de cores',
-    referencesTitle: 'Referências',
-    colors: [
-      { name: 'Marfim', hex: '#F3EEE6' },
-      { name: 'Areia', hex: '#E4D5C3' },
-      { name: 'Sálvia', hex: '#C5D0C8' },
-      { name: 'Blush', hex: '#E6D2CC' },
-      { name: 'Azul-noite', hex: '#02345B' },
+    eyebrow: 'traje - como se vestir',
+    name: 'Confortável e bonito',
+    description: [
+      'Não teremos traje obrigatório. Queremos que você se sinta confortável, bonito(a) e à vontade para aproveitar cada momento desse dia com a gente.',
+      'Escolha um look que tenha a sua cara e venha celebrar! 🤍',
     ],
+    referencesTitle: 'Referências',
     references: [],
   },
   gifts: {
@@ -187,6 +180,16 @@ export const wedding: WeddingContent = {
     text: 'Sua presença já enche este dia de significado. Se quiser nos presentear, deixamos uma lista preparada com carinho.',
     button: 'Ver lista de presentes',
     url: '',
+    items: [
+      { id: 'tacas', name: 'Jogo de taças', priceCents: 18900 },
+      { id: 'jantar', name: 'Jogo de jantar', priceCents: 25900 },
+      { id: 'cama', name: 'Jogo de cama', priceCents: 34900 },
+      { id: 'toalhas', name: 'Jogo de toalhas', priceCents: 15900 },
+      { id: 'cafeteira', name: 'Cafeteira', priceCents: 42900 },
+      { id: 'panelas', name: 'Jogo de panelas', priceCents: 38900 },
+      { id: 'mala', name: 'Mala de viagem', priceCents: 59900 },
+      { id: 'quadro', name: 'Quadro da casa', priceCents: 21900 },
+    ],
   },
   rsvp: {
     eyebrow: 'Presença',

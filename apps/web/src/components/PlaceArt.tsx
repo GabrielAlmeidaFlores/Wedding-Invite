@@ -45,10 +45,7 @@ export function PlaceDivider() {
   return (
     <div className="place-divider" aria-hidden="true">
       <span />
-      <svg className="place-sprig" viewBox="0 0 52 16" fill="none">
-        <path d="M26 10c-6 0-12-3-18-5 6 1 12 3 18 5 6-2 12-4 18-5-6 2-12 5-18 5Z" stroke="currentColor" strokeWidth="1.05" strokeLinejoin="round" />
-        <path d="M26 10c-3-3-4-6-2.5-8 1.2 2.4 2 5 2.5 8 .5-3 1.3-5.6 2.5-8-1.5 2-2.5 5-2.5 8Z" stroke="currentColor" strokeWidth="1.05" strokeLinejoin="round" />
-      </svg>
+      <img className="place-sprig" src="/images/elementos/rosa-azul.svg" alt="" />
       <span />
     </div>
   );
