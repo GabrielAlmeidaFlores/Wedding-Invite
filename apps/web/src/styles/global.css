@@ -610,7 +610,7 @@ svg.icon {
   flex-direction: column;
   height: 100%;
   overflow: hidden;
-  background: var(--bg-raised);
+  background: #f7f8fa;
   border: 1px solid rgba(2, 52, 91, 0.08);
   border-radius: 1.15rem;
 }
@@ -619,7 +619,7 @@ svg.icon {
   display: grid;
   place-items: center;
   aspect-ratio: 1;
-  background: #f4efe6;
+  background: #f7f8fa;
 }
 
 .gift-card-media img {
@@ -639,6 +639,12 @@ svg.icon {
   flex-direction: column;
   gap: 0.35rem;
   padding: 0.9rem 0.95rem 1.05rem;
+}
+
+.gift-card-give {
+  margin-top: 0.55rem;
+  min-height: 2.5rem;
+  padding: 0.55rem 1rem;
 }
 
 .gift-card h4 {
@@ -954,7 +960,7 @@ svg.icon {
 .rsvp-success {
   margin-top: 2rem;
   padding: clamp(1.25rem, 4vw, 2.5rem);
-  background: var(--bg-raised);
+  background: #f7f8fa;
   border: 1px solid rgba(2, 52, 91, 0.08);
   border-radius: 1.15rem;
 }

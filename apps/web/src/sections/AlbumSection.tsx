@@ -27,7 +27,6 @@ export function AlbumSection() {
         />
         <div className="section-actions">
           <Button type="button" onClick={() => inputRef.current?.click()}>
-            <Icon name="image" />
             {copy.share}
           </Button>
           <input

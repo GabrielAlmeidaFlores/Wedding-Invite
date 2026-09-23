@@ -69,6 +69,7 @@ export type WeddingContent = {
     title: string;
     text: string;
     button: string;
+    giveLabel: string;
     url: string;
     items: readonly GiftItem[];
   };
@@ -145,8 +146,8 @@ export const wedding: WeddingContent = {
     { id: 'inicio', href: '#inicio', label: 'Início' },
     { id: 'casamento', href: '#casamento', label: 'O Casamento' },
     { id: 'dress-code', href: '#dress-code', label: 'O que vestir' },
-    { id: 'presentes', href: '/presentes', label: 'Presentes' },
-    { id: 'rsvp', href: '#rsvp', label: 'RSVP' },
+    { id: 'presentes', href: '#presentes', label: 'Presentes' },
+    { id: 'rsvp', href: '#rsvp', label: 'Presença' },
     { id: 'album', href: '#album', label: 'Álbum' },
   ],
   hero: {
@@ -177,6 +178,7 @@ export const wedding: WeddingContent = {
     title: 'Lista de presentes',
     text: 'Sua presença já enche este dia de significado. Se quiser nos presentear, deixamos uma lista preparada com carinho.',
     button: 'Ver lista de presentes',
+    giveLabel: 'Presentear',
     url: '',
     items: [
       { id: 'tacas', name: 'Jogo de taças', priceCents: 18900 },
