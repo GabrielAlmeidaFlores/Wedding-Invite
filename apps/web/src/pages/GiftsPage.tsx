@@ -1,6 +1,7 @@
 import { wedding } from '@/data/wedding';
 import { GiftCatalog } from '@/components/GiftCatalog';
 import { SectionHeading } from '@/components/SectionHeading';
+import { SiteCredit } from '@/components/SiteCredit';
 
 export function GiftsPage() {
   const { gifts } = wedding;
@@ -30,6 +31,7 @@ export function GiftsPage() {
           </div>
         </section>
       </main>
+      <SiteCredit />
     </>
   );
 }

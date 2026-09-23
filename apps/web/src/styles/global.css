@@ -36,7 +36,7 @@ html {
 body {
   margin: 0;
   background-color: #f4f6f7;
-  background-image: url('/images/elementos/bg-site.png');
+  background-image: url('/images/elementos/bg-site.webp');
   background-repeat: repeat;
   background-size: var(--paper-size) auto;
   background-position: center top;
@@ -174,7 +174,7 @@ svg.icon {
 .sticky-header.is-scrolled .header-bar,
 .sticky-header.is-menu-open .header-bar {
   background-color: #f4f6f7;
-  background-image: url('/images/elementos/bg-site.png');
+  background-image: url('/images/elementos/bg-site.webp');
   background-repeat: repeat;
   background-size: var(--paper-size) auto;
   background-position: center top;
@@ -355,7 +355,7 @@ svg.icon {
   top: calc(100vw * 865 / 1512);
   bottom: 0;
   background-color: #f4f6f7;
-  background-image: url('/images/elementos/bg-site.png');
+  background-image: url('/images/elementos/bg-site.webp');
   background-repeat: repeat;
   background-size: var(--paper-size) auto;
   background-position: center top;
@@ -365,7 +365,7 @@ svg.icon {
 .section-album,
 .section-rsvp {
   background-color: transparent;
-  background-image: url('/images/elementos/bg-site.png');
+  background-image: url('/images/elementos/bg-site.webp');
   background-repeat: repeat;
   background-size: var(--paper-size) auto;
   background-position: center top;
@@ -381,10 +381,11 @@ svg.icon {
 
 .gifts-present {
   position: absolute;
-  left: 0.2rem;
+  left: 50%;
   bottom: 0;
   width: 8.5rem;
   height: auto;
+  transform: translateX(-50%);
   pointer-events: none;
 }
 
@@ -397,7 +398,7 @@ svg.icon {
   background-color: #f4f6f7;
   background-image:
     url('/images/elementos/papel-blue.svg'),
-    url('/images/elementos/bg-site.png');
+    url('/images/elementos/bg-site.webp');
   background-repeat: no-repeat, repeat;
   background-size: cover, var(--paper-size) auto;
   background-position: center, center top;
@@ -574,7 +575,7 @@ svg.icon {
   height: calc(var(--header-h) + env(safe-area-inset-top));
   padding: env(safe-area-inset-top) var(--gutter) 0;
   background-color: #f4f6f7;
-  background-image: url('/images/elementos/bg-site.png');
+  background-image: url('/images/elementos/bg-site.webp');
   background-repeat: repeat;
   background-size: var(--paper-size) auto;
   background-position: center top;
@@ -704,7 +705,7 @@ svg.icon {
   flex-direction: column;
   align-items: center;
   background-color: #f4f6f7;
-  background-image: url('/images/elementos/bg-site.png');
+  background-image: url('/images/elementos/bg-site.webp');
   background-repeat: repeat;
   background-size: var(--paper-size) auto;
   background-position: center top;
@@ -837,7 +838,7 @@ svg.icon {
 }
 
 .place-sprig {
-  width: 2.89rem;
+  width: 4.5rem;
   height: auto;
   flex: none;
 }
@@ -849,14 +850,8 @@ svg.icon {
   align-items: center;
 }
 
-.place-art {
-  width: 7.25rem;
-  height: auto;
-  color: var(--navy);
-}
-
 .place-label {
-  margin: 0.7rem 0 0;
+  margin: 0;
   color: var(--navy);
   font-family: "Cormorant Garamond", Palatino, serif;
   font-size: clamp(2.15rem, 6vw, 2.65rem);
@@ -1281,6 +1276,21 @@ fieldset.has-error .choice {
   gap: 0.75rem;
 }
 
+.section-album {
+  position: relative;
+}
+
+.album-simba {
+  position: absolute;
+  z-index: 4;
+  left: 50%;
+  bottom: 0;
+  width: 11.5rem;
+  height: auto;
+  transform: translate(-50%, 42%);
+  pointer-events: none;
+}
+
 .closing {
   display: grid;
   align-items: center;
@@ -1319,7 +1329,7 @@ fieldset.has-error .choice {
 .site-credit p {
   margin: 0;
   padding: 0.7rem var(--gutter);
-  font-size: clamp(0.62rem, 2.35vw, 0.82rem);
+  font-size: clamp(0.58rem, 2.2vw, 0.82rem);
   font-weight: 400;
   line-height: 1.2;
   white-space: nowrap;
@@ -1379,12 +1389,26 @@ fieldset.has-error .choice {
   }
 
   .gifts-present {
+    left: calc(0.2rem + 13rem * 0.15);
     width: 13rem;
+    transform: none;
   }
 
   .gift-catalog {
     grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 1.25rem;
+  }
+
+  .closing-inner.container-narrow {
+    width: min(52rem, calc(100% - 2 * var(--gutter)));
+  }
+
+  .closing-note {
+    width: min(100%, 48rem);
+  }
+
+  .album-simba {
+    width: 16.5rem;
   }
 
   .dress-simba {
@@ -1430,11 +1454,11 @@ fieldset.has-error .choice {
     border-top: 3px solid transparent;
   }
 
-  .sticky-header.is-scrolled {
+  .sticky-header.is-scrolled.is-visible {
     background-color: #f4f6f7;
-    background-image: url('/images/elementos/bg-site.png');
+    background-image: url('/images/elementos/bg-site.webp');
     background-repeat: repeat;
-  background-size: var(--paper-size) auto;
+    background-size: var(--paper-size) auto;
     background-position: center top;
     border-top-color: var(--navy);
     border-bottom: 1px solid var(--line);

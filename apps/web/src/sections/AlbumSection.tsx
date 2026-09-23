@@ -23,7 +23,7 @@ export function AlbumSection() {
           eyebrow={copy.eyebrow}
           title={copy.title}
           lede={copy.text}
-          ornament="none"
+          ornament="flower"
         />
         <div className="section-actions">
           <Button type="button" onClick={() => inputRef.current?.click()}>
@@ -66,6 +66,7 @@ export function AlbumSection() {
           </ul>
         )}
       </div>
+      <img className="album-simba" src="/images/elementos/simba2.webp" alt="" decoding="async" loading="lazy" />
       <Lightbox photos={photos} activeId={activeId} onClose={() => setActiveId(null)} onSelect={setActiveId} />
     </section>
   );

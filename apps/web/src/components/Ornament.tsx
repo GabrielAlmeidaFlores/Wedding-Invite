@@ -10,6 +10,8 @@ export function Ornament({ variant = 'line' }: OrnamentProps) {
         src="/images/elementos/flor1.svg"
         alt=""
         aria-hidden="true"
+        decoding="async"
+        loading="lazy"
       />
     );
   }

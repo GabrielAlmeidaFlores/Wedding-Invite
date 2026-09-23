@@ -22,7 +22,7 @@ export function GiftsSection() {
           <Button href="/presentes">{gifts.button}</Button>
         </div>
       </div>
-      <img className="gifts-present" src="/images/elementos/presente.png" alt="" />
+      <img className="gifts-present" src="/images/elementos/presente.webp" alt="" decoding="async" loading="lazy" />
     </section>
   );
 }

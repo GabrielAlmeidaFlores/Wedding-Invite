@@ -1,4 +1,5 @@
 import { Header } from '@/components/Header';
+import { SiteCredit } from '@/components/SiteCredit';
 import { GiftsPage } from '@/pages/GiftsPage';
 import { AlbumSection } from '@/sections/AlbumSection';
 import { ClosingSection } from '@/sections/ClosingSection';
@@ -21,15 +22,7 @@ function InvitePage() {
         <AlbumSection />
         <ClosingSection />
       </main>
-      <footer className="site-credit">
-        <p>
-          © 2026 Enlace por{' '}
-          <a href="https://kybers.com.br/" target="_blank" rel="noreferrer">
-            Kyber Soluçoes
-          </a>
-          . Todos os direitos reservados.
-        </p>
-      </footer>
+      <SiteCredit />
     </>
   );
 }

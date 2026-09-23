@@ -33,7 +33,7 @@ export function DressCodeSection() {
           </div>
         ) : null}
       </div>
-      <img className="dress-simba" src="/images/elementos/simba1.png" alt="" />
+      <img className="dress-simba" src="/images/elementos/simba1.webp" alt="" decoding="async" loading="lazy" />
     </section>
   );
 }

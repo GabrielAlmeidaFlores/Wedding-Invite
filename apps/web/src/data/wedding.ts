@@ -230,7 +230,7 @@ export const wedding: WeddingContent = {
     unreadable: 'Não foi possível exibir esta foto.',
   },
   closing: {
-    line1: 'O melhor presente é ter vocês conosco nesse dia.',
+    line1: 'Que bom poder viver esse momento ao lado de quem amamos. Obrigado por fazerem parte dele.',
     line2: 'Estamos muito felizes em compartilhar esse momento com as pessoas que fazem parte da nossa história.',
   },
 };

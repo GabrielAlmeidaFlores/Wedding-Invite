@@ -1,10 +1,10 @@
-import { wedding, type WeddingPlace } from '@/data/wedding';
+import { wedding } from '@/data/wedding';
 import { padUnit } from '@/lib/countdown';
 import { mapsLink } from '@/lib/maps';
 import { useCountdown } from '@/hooks/use-countdown';
 import { useReveal } from '@/hooks/use-reveal';
 import { Button } from '@/components/Button';
-import { CheersArt, ChurchArt, PlaceDivider } from '@/components/PlaceArt';
+import { PlaceDivider } from '@/components/PlaceArt';
 import { SectionHeading } from '@/components/SectionHeading';
 
 const COUNTDOWN_UNITS = [
@@ -35,11 +35,6 @@ function WeddingCountdown() {
   );
 }
 
-function PlaceMark({ icon }: { icon: WeddingPlace['icon'] }) {
-  if (icon === 'cheers') return <CheersArt />;
-  return <ChurchArt />;
-}
-
 export function WeddingSection() {
   const ref = useReveal<HTMLElement>();
 
@@ -64,7 +59,6 @@ export function WeddingSection() {
               <div className="place-block" key={place.id}>
                 <PlaceDivider />
                 <div className="place-card">
-                  <PlaceMark icon={place.icon} />
                   <h3 className="place-label">{place.label}</h3>
                   <p className="place-when">{place.when}</p>
                   <p className="place-name">{place.name}</p>

@@ -17,6 +17,7 @@ export function HeroSection() {
               src="/images/elementos/convite.svg"
               alt=""
               fetchPriority="high"
+              decoding="async"
             />
           </div>
           <h1 id="inicio-title" className="hero-names">
@@ -40,11 +41,14 @@ export function HeroSection() {
           </a>
         </div>
         <picture className="invite-photo">
+          <source media="(max-width: 959px)" type="image/webp" srcSet="/images/fotos/capa/principal-mobile.webp" />
           <source media="(max-width: 959px)" srcSet="/images/fotos/capa/principal-mobile.png" />
+          <source type="image/webp" srcSet="/images/fotos/capa/bg-foto-principal.webp" />
           <img
             src="/images/fotos/capa/bg-foto-principal.png"
             alt={`${wedding.bride} e ${wedding.groom}`}
             fetchPriority="high"
+            decoding="async"
           />
         </picture>
       </div>

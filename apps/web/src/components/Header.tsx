@@ -18,15 +18,36 @@ export function Header() {
     const weddingStart = weddingSection?.querySelector('.wedding-quote') ?? weddingSection;
     if (!weddingStart) return;
 
-    const onScroll = () => {
-      setScrolled(window.scrollY > 8);
+    let frame = 0;
+    let lastScrolled = false;
+    let lastVisible = false;
+
+    const update = () => {
+      frame = 0;
+      const nextScrolled = window.scrollY > 8;
       const headerHeight = document.querySelector('.sticky-header')?.getBoundingClientRect().height ?? 0;
-      setVisible(weddingStart.getBoundingClientRect().top <= headerHeight);
+      const nextVisible = weddingStart.getBoundingClientRect().top <= headerHeight;
+      if (nextScrolled !== lastScrolled) {
+        lastScrolled = nextScrolled;
+        setScrolled(nextScrolled);
+      }
+      if (nextVisible !== lastVisible) {
+        lastVisible = nextVisible;
+        setVisible(nextVisible);
+      }
     };
 
-    onScroll();
+    const onScroll = () => {
+      if (frame !== 0) return;
+      frame = window.requestAnimationFrame(update);
+    };
+
+    update();
     window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      if (frame !== 0) window.cancelAnimationFrame(frame);
+    };
   }, []);
 
   useEffect(() => {

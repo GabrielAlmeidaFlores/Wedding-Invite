@@ -9,9 +9,9 @@ export function GiftCatalog() {
           <article className="gift-card">
             <div className="gift-card-media">
               {item.image ? (
-                <img src={item.image.src} alt={item.image.alt} />
-              ) : (
-                <img className="gift-card-mark" src="/images/elementos/flor1.svg" alt="" />
+                    <img src={item.image.src} alt={item.image.alt} decoding="async" loading="lazy" />
+                  ) : (
+                    <img className="gift-card-mark" src="/images/elementos/flor1.svg" alt="" decoding="async" loading="lazy" />
               )}
             </div>
             <div className="gift-card-body">

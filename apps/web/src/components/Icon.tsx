@@ -1,52 +1,31 @@
-import AccessTimeOutlined from '@mui/icons-material/AccessTimeOutlined';
-import CalendarTodayOutlined from '@mui/icons-material/CalendarTodayOutlined';
-import ChevronLeftOutlined from '@mui/icons-material/ChevronLeftOutlined';
-import ChevronRightOutlined from '@mui/icons-material/ChevronRightOutlined';
-import ChurchOutlined from '@mui/icons-material/ChurchOutlined';
-import CloseOutlined from '@mui/icons-material/CloseOutlined';
-import ImageOutlined from '@mui/icons-material/ImageOutlined';
-import KeyboardArrowDownOutlined from '@mui/icons-material/KeyboardArrowDownOutlined';
-import NotesOutlined from '@mui/icons-material/NotesOutlined';
-import PlaceOutlined from '@mui/icons-material/PlaceOutlined';
-import SvgIcon, { type SvgIconProps } from '@mui/material/SvgIcon';
-
-function CheersIcon(props: SvgIconProps) {
-  return (
-    <SvgIcon {...props} viewBox="0 0 24 24">
-      <g fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M4.6 7.2 8.8 4.6l-.5 6.2a1.7 1.7 0 0 1-1.7 1.5h-.2a1.7 1.7 0 0 1-1.7-1.5z" />
-        <path d="M6.5 12.3 5.7 18.2M4 18.2h3.4" />
-        <path d="M19.4 7.2 15.2 4.6l.5 6.2a1.7 1.7 0 0 1 1.7 1.5h.2a1.7 1.7 0 0 1 1.7-1.5z" />
-        <path d="M17.5 12.3 18.3 18.2M20 18.2h-3.4" />
-        <path d="m11.1 3.1.9 1.5.9-1.5" />
-      </g>
-    </SvgIcon>
-  );
-}
-
-const icons = {
-  calendar: CalendarTodayOutlined,
-  cheers: CheersIcon,
-  clock: AccessTimeOutlined,
-  church: ChurchOutlined,
-  pin: PlaceOutlined,
-  image: ImageOutlined,
-  'chevron-down': KeyboardArrowDownOutlined,
-  'chevron-left': ChevronLeftOutlined,
-  'chevron-right': ChevronRightOutlined,
-  close: CloseOutlined,
-  lines: NotesOutlined,
-} as const;
-
-type IconName = keyof typeof icons;
+type IconName = 'image' | 'close' | 'chevron-left' | 'chevron-right';
 
 type IconProps = {
   name: IconName;
   className?: string;
 };
 
-export function Icon({ name, className }: IconProps) {
-  const Glyph = icons[name];
+const paths: Record<IconName, string> = {
+  image:
+    'M4 5.5A1.5 1.5 0 0 1 5.5 4h13A1.5 1.5 0 0 1 20 5.5v13a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 4 18.5v-13Zm1.5-.5a.5.5 0 0 0-.5.5v13a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-13a.5.5 0 0 0-.5-.5h-13Zm2 3.25a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5ZM6 16.5l3.2-3.2a1 1 0 0 1 1.4 0L13 15.7l1.4-1.4a1 1 0 0 1 1.4 0L18 16.5',
+  close: 'M6.3 6.3 12 12m0 0 5.7 5.7M12 12 6.3 17.7M12 12l5.7-5.7',
+  'chevron-left': 'M14.5 6.5 9 12l5.5 5.5',
+  'chevron-right': 'M9.5 6.5 15 12l-5.5 5.5',
+};
 
-  return <Glyph className={className ? `icon ${className}` : 'icon'} aria-hidden fontSize="inherit" />;
+export function Icon({ name, className }: IconProps) {
+  return (
+    <svg
+      className={className ? `icon ${className}` : 'icon'}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden
+    >
+      <path d={paths[name]} />
+    </svg>
+  );
 }
