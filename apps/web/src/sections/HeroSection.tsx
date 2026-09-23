@@ -12,13 +12,20 @@ export function HeroSection() {
       <div className="invite-sticky">
         <div className="invite-flap" ref={flapRef}>
           <div className="hero-envelope-frame">
-            <img
-              className="hero-envelope"
-              src="/images/elementos/convite.svg"
-              alt=""
-              fetchPriority="high"
-              decoding="async"
-            />
+            <picture>
+              <source
+                media="(max-width: 959px)"
+                type="image/webp"
+                srcSet="/images/elementos/convite-mobile.webp"
+              />
+              <img
+                className="hero-envelope"
+                src="/images/elementos/convite.svg"
+                alt=""
+                fetchPriority="high"
+                decoding="async"
+              />
+            </picture>
           </div>
           <h1 id="inicio-title" className="hero-names">
             <img

@@ -2,6 +2,7 @@ import { wedding } from '@/data/wedding';
 import { GiftCatalog } from '@/components/GiftCatalog';
 import { SectionHeading } from '@/components/SectionHeading';
 import { SiteCredit } from '@/components/SiteCredit';
+import { ClosingSection } from '@/sections/ClosingSection';
 
 export function GiftsPage() {
   const { gifts } = wedding;
@@ -30,6 +31,7 @@ export function GiftsPage() {
             <GiftCatalog />
           </div>
         </section>
+        <ClosingSection />
       </main>
       <SiteCredit />
     </>

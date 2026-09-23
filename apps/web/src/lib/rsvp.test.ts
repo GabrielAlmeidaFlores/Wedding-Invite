@@ -5,7 +5,6 @@ const valid: RsvpDraft = {
   fullName: 'Ana Souza',
   presence: 'yes',
   companions: 1,
-  notes: '  mesa perto da família  ',
 };
 
 describe('validateRsvp', () => {
@@ -35,7 +34,6 @@ describe('toRsvpPayload', () => {
       fullName: 'Ana Souza',
       presence: 'no',
       companions: 0,
-      notes: 'mesa perto da família',
     });
   });
 

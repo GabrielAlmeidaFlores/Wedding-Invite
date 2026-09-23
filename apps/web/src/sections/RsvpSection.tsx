@@ -20,7 +20,6 @@ export function RsvpSection() {
   const [fullName, setFullName] = useState('');
   const [presence, setPresence] = useState<Presence | ''>('');
   const [companions, setCompanions] = useState(0);
-  const [notes, setNotes] = useState('');
   const [errors, setErrors] = useState<RsvpErrors>({});
   const [submitted, setSubmitted] = useState(false);
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
@@ -34,7 +33,7 @@ export function RsvpSection() {
 
   const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const draft = { fullName, presence, companions, notes };
+    const draft = { fullName, presence, companions };
     const nextErrors = validateRsvp(draft);
     setErrors(nextErrors);
     setSubmitted(true);
@@ -200,21 +199,6 @@ export function RsvpSection() {
                 ) : null}
               </div>
             ) : null}
-
-            <div className="field">
-              <label htmlFor="notes">
-                {copy.notesLabel} <span className="optional">opcional</span>
-              </label>
-              <textarea
-                id="notes"
-                name="notes"
-                rows={4}
-                maxLength={500}
-                placeholder={copy.notesPlaceholder}
-                value={notes}
-                onChange={(event) => setNotes(event.target.value)}
-              />
-            </div>
 
             {status === 'error' ? (
               <p className="field-error" role="alert">

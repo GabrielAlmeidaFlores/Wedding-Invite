@@ -4,14 +4,12 @@ export type RsvpDraft = {
   fullName: string;
   presence: Presence | '';
   companions: number;
-  notes: string;
 };
 
 export type RsvpPayload = {
   fullName: string;
   presence: Presence;
   companions: number;
-  notes: string;
 };
 
 export type RsvpErrors = Partial<Record<'fullName' | 'presence' | 'companions', true>>;
@@ -40,7 +38,6 @@ export function toRsvpPayload(draft: RsvpDraft): RsvpPayload | null {
     fullName: draft.fullName.trim(),
     presence: draft.presence,
     companions: draft.presence === 'yes' ? draft.companions : 0,
-    notes: draft.notes.trim(),
   };
 }
 

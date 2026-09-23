@@ -83,8 +83,6 @@ export type WeddingContent = {
     presenceNo: string;
     companionsLabel: string;
     companionsHint: string;
-    notesLabel: string;
-    notesPlaceholder: string;
     submit: string;
     submitting: string;
     edit: string;
@@ -202,8 +200,6 @@ export const wedding: WeddingContent = {
     presenceNo: 'Não poderei ir',
     companionsLabel: 'Número de acompanhantes',
     companionsHint: 'Não inclua você nesta contagem.',
-    notesLabel: 'Observações',
-    notesPlaceholder: 'Algo que devamos saber?',
     submit: 'Confirmar presença',
     submitting: 'Enviando…',
     edit: 'Editar resposta',

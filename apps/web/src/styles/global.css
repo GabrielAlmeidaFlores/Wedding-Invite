@@ -723,7 +723,7 @@ svg.icon {
   display: block;
   width: 100%;
   max-width: none;
-  height: clamp(58svh, calc(100vw * 733 / 1512), 82svh);
+  height: clamp(58svh, calc(100vw * 1482 / 786), 82svh);
   object-fit: cover;
   object-position: center bottom;
   clip-path: inset(0);
@@ -731,7 +731,7 @@ svg.icon {
 
 .hero-names {
   width: min(100% - 2 * var(--gutter), 34rem);
-  margin: clamp(1.1rem, 3.2vh, 2rem) 0 0;
+  margin: clamp(-2.6rem, -5.5vh, -1.6rem) 0 0;
 }
 
 .hero-logo {
@@ -740,7 +740,7 @@ svg.icon {
 }
 
 .hero-date {
-  margin: 0.85rem 0 0;
+  margin: 0.5rem 0 0;
   color: var(--navy);
   font-family: var(--font-serif);
   font-size: clamp(0.95rem, 2.4vw, 1.2rem);
@@ -1415,11 +1415,20 @@ fieldset.has-error .choice {
     width: 13.605rem;
   }
 
+  .hero-envelope {
+    height: clamp(58svh, calc(100vw * 733 / 1512), 82svh);
+  }
+
   .hero-envelope-frame {
     margin-top: calc(clamp(58svh, calc(100vw * 733 / 1512), 82svh) * -0.1);
   }
 
+  .hero-names {
+    margin: clamp(1.1rem, 3.2vh, 2rem) 0 0;
+  }
+
   .hero-date {
+    margin: 0.85rem 0 0;
     font-size: clamp(0.76rem, 1.92vw, 0.96rem);
   }
 
