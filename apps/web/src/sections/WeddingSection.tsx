@@ -1,4 +1,4 @@
-import { wedding } from '@/data/wedding';
+import { useWeddingSite } from '@/hooks/use-wedding-site';
 import { padUnit } from '@/lib/countdown';
 import { mapsLink } from '@/lib/maps';
 import { useCountdown } from '@/hooks/use-countdown';
@@ -15,6 +15,7 @@ const COUNTDOWN_UNITS = [
 ] as const;
 
 function WeddingCountdown() {
+  const wedding = useWeddingSite();
   const remaining = useCountdown(wedding.dateTimeIso);
 
   if (remaining.isPast) {
@@ -36,6 +37,7 @@ function WeddingCountdown() {
 }
 
 export function WeddingSection() {
+  const wedding = useWeddingSite();
   const ref = useReveal<HTMLElement>();
 
   return (
@@ -43,7 +45,6 @@ export function WeddingSection() {
       <div className="container">
         <blockquote className="wedding-quote">
           <p>“{wedding.wedding.quote}”</p>
-          <footer>— {wedding.wedding.quoteAuthor}</footer>
         </blockquote>
         <SectionHeading
           titleId="casamento-title"
@@ -65,7 +66,7 @@ export function WeddingSection() {
                   <p className="place-address">{place.address}</p>
                   <div className="place-actions">
                     <Button
-                      href={mapsLink(`${place.name}, ${place.address}`, '')}
+                      href={mapsLink(`${place.name}, ${place.address}`, place.mapUrl ?? '')}
                       target="_blank"
                       rel="noreferrer"
                     >

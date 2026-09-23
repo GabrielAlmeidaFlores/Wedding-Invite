@@ -1,11 +1,12 @@
-import { wedding } from '@/data/wedding';
 import { useReveal } from '@/hooks/use-reveal';
+import { useWeddingSite } from '@/hooks/use-wedding-site';
+import { GiftCatalog } from '@/components/GiftCatalog';
 import { Button } from '@/components/Button';
 import { SectionHeading } from '@/components/SectionHeading';
 
 export function GiftsSection() {
   const ref = useReveal<HTMLElement>();
-  const { gifts } = wedding;
+  const { gifts } = useWeddingSite();
 
   return (
     <section className="section section-gifts" id="presentes" aria-labelledby="presentes-title" ref={ref}>
@@ -18,6 +19,9 @@ export function GiftsSection() {
           lede={gifts.text}
           ornament="flower"
         />
+      </div>
+      <div className="container gifts-catalog-wrap">
+        <GiftCatalog />
         <div className="section-actions">
           <Button href="/presentes">{gifts.button}</Button>
         </div>

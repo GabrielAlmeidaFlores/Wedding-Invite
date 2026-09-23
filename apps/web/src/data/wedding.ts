@@ -24,12 +24,15 @@ export type WeddingPlace = {
   when: string;
   name: string;
   address: string;
+  mapUrl?: string;
 };
 
 export type GiftItem = {
   id: string;
   name: string;
-  priceCents: number;
+  priceCents?: number;
+  description?: string;
+  link?: string;
   image?: ImageAsset;
 };
 
@@ -37,9 +40,11 @@ export type WeddingContent = {
   monogram: string;
   groom: string;
   bride: string;
+  siteTitle: string;
   phrase: string;
   heroImage: string;
   heroImageAlt: string;
+  logoUrl: string;
   dateLabel: string;
   dateTimeIso: string;
   places: readonly WeddingPlace[];
@@ -48,6 +53,8 @@ export type WeddingContent = {
     eyebrow: string;
     continueLabel: string;
     countdownFinished: string;
+    envelope: string;
+    envelopeMobile: string;
   };
   wedding: {
     quote: string;
@@ -61,6 +68,8 @@ export type WeddingContent = {
     eyebrow: string;
     name: string;
     description: readonly string[];
+    art: string;
+    artAlign: 'left' | 'center' | 'right';
     referencesTitle: string;
     references: readonly ImageAsset[];
   };
@@ -82,8 +91,8 @@ export type WeddingContent = {
     presenceLabel: string;
     presenceYes: string;
     presenceNo: string;
-    companionsLabel: string;
-    companionsHint: string;
+    notesLabel: string;
+    notesPlaceholder: string;
     submit: string;
     submitting: string;
     edit: string;
@@ -92,7 +101,6 @@ export type WeddingContent = {
     errors: {
       name: string;
       presence: string;
-      companions: string;
       submit: string;
     };
   };
@@ -108,20 +116,30 @@ export type WeddingContent = {
     next: string;
     close: string;
     unreadable: string;
+    art: string;
   };
   closing: {
     line1: string;
     line2: string;
+    art: string;
+    artDesktop: string;
   };
 };
+
+export const envelopeArt = {
+  mobile: { src: '/images/elementos/convite-mobile.webp', width: 786, height: 994 },
+  desktop: { src: '/images/elementos/convite.svg', width: 1512, height: 778 },
+} as const;
 
 export const wedding: WeddingContent = {
   monogram: 'G & J',
   groom: 'João Gabriel',
   bride: 'Geísa Vitória',
+  siteTitle: 'Geísa & João Gabriel',
   phrase: 'Um dia inteiro para dizer sim ao que escolhemos juntos.',
-  heroImage: '',
+  heroImage: '/images/fotos/capa/bg-foto-principal.png',
   heroImageAlt: 'Foto principal do casal',
+  logoUrl: '/images/elementos/logo-principal.svg',
   dateLabel: '20 de maio de 2028',
   dateTimeIso: '2028-05-20T16:00:00',
   places: [
@@ -154,9 +172,12 @@ export const wedding: WeddingContent = {
     eyebrow: 'Nosso casamento',
     continueLabel: 'Role para saber mais',
     countdownFinished: 'O grande dia chegou.',
+    envelope: envelopeArt.desktop.src,
+    envelopeMobile: envelopeArt.mobile.src,
   },
   wedding: {
-    quote: 'Entre todas as coisas deste mundo, o amor fez de nós um só coração.',
+    quote:
+      'Entre todas as coisas deste mundo, o amor fez de nós um só coração. — Santo Agostinho',
     quoteAuthor: 'Santo Agostinho',
     eyebrow: 'Celebração',
     title: 'O casamento',
@@ -170,6 +191,8 @@ export const wedding: WeddingContent = {
       'Não teremos traje obrigatório. Queremos que você se sinta confortável, bonito(a) e à vontade para aproveitar cada momento desse dia com a gente.',
       'Escolha um look que tenha a sua cara e venha celebrar! 🤍',
     ],
+    art: '/images/elementos/simba1.webp',
+    artAlign: 'right',
     referencesTitle: 'Referências',
     references: [],
   },
@@ -200,8 +223,8 @@ export const wedding: WeddingContent = {
     presenceLabel: 'Confirmação de presença',
     presenceYes: 'Sim, confirmo',
     presenceNo: 'Não poderei ir',
-    companionsLabel: 'Número de acompanhantes',
-    companionsHint: 'Não inclua você nesta contagem.',
+    notesLabel: 'Observações',
+    notesPlaceholder: 'Algo que devamos saber?',
     submit: 'Confirmar presença',
     submitting: 'Enviando…',
     edit: 'Editar resposta',
@@ -210,7 +233,6 @@ export const wedding: WeddingContent = {
     errors: {
       name: 'Informe o nome completo.',
       presence: 'Confirme se poderá comparecer.',
-      companions: 'Informe de 0 a 10 acompanhantes.',
       submit: 'Não foi possível enviar agora. Tente de novo em instantes.',
     },
   },
@@ -226,10 +248,13 @@ export const wedding: WeddingContent = {
     next: 'Próxima foto',
     close: 'Fechar foto',
     unreadable: 'Não foi possível exibir esta foto.',
+    art: '/images/elementos/simba2.webp',
   },
   closing: {
     line1: 'Que bom poder viver esse momento ao lado de quem amamos. Obrigado por fazerem parte dele.',
     line2: 'Estamos muito felizes em compartilhar esse momento com as pessoas que fazem parte da nossa história.',
+    art: '/images/elementos/recado.svg',
+    artDesktop: '/images/elementos/recado-web.svg',
   },
 };
 

@@ -1,8 +1,9 @@
 import { useRef } from 'react';
-import { wedding } from '@/data/wedding';
+import { useWeddingSite } from '@/hooks/use-wedding-site';
 import { useInviteOpen } from '@/hooks/use-invite-open';
 
 export function HeroSection() {
+  const wedding = useWeddingSite();
   const stageRef = useRef<HTMLElement>(null);
   const flapRef = useRef<HTMLDivElement>(null);
   useInviteOpen(stageRef, flapRef);
@@ -13,14 +14,12 @@ export function HeroSection() {
         <div className="invite-flap" ref={flapRef}>
           <div className="hero-envelope-frame">
             <picture>
-              <source
-                media="(max-width: 959px)"
-                type="image/webp"
-                srcSet="/images/elementos/convite-mobile.webp"
-              />
+              {wedding.hero.envelopeMobile !== wedding.hero.envelope ? (
+                <source media="(max-width: 959px)" srcSet={wedding.hero.envelopeMobile} />
+              ) : null}
               <img
                 className="hero-envelope"
-                src="/images/elementos/convite.svg"
+                src={wedding.hero.envelope}
                 alt=""
                 fetchPriority="high"
                 decoding="async"
@@ -48,11 +47,15 @@ export function HeroSection() {
           </a>
         </div>
         <picture className="invite-photo">
-          <source media="(max-width: 959px)" type="image/webp" srcSet="/images/fotos/capa/principal-mobile.webp" />
-          <source media="(max-width: 959px)" srcSet="/images/fotos/capa/principal-mobile.png" />
-          <source type="image/webp" srcSet="/images/fotos/capa/bg-foto-principal.webp" />
+          {wedding.heroImage === '/images/fotos/capa/bg-foto-principal.png' ? (
+            <>
+              <source media="(max-width: 959px)" type="image/webp" srcSet="/images/fotos/capa/principal-mobile.webp" />
+              <source media="(max-width: 959px)" srcSet="/images/fotos/capa/principal-mobile.png" />
+              <source type="image/webp" srcSet="/images/fotos/capa/bg-foto-principal.webp" />
+            </>
+          ) : null}
           <img
-            src="/images/fotos/capa/bg-foto-principal.png"
+            src={wedding.heroImage}
             alt={`${wedding.bride} e ${wedding.groom}`}
             fetchPriority="high"
             decoding="async"

@@ -4,7 +4,7 @@ import { hasRsvpErrors, toRsvpPayload, validateRsvp, type RsvpDraft } from '@/li
 const valid: RsvpDraft = {
   fullName: 'Ana Souza',
   presence: 'yes',
-  companions: 1,
+  notes: '  mesa perto da família  ',
 };
 
 describe('validateRsvp', () => {
@@ -19,21 +19,17 @@ describe('validateRsvp', () => {
     });
   });
 
-  it('should ignore companions when the guest cannot attend', () => {
-    expect(validateRsvp({ ...valid, presence: 'no', companions: -1 })).toEqual({});
-  });
-
-  it('should reject an out of range companion count', () => {
-    expect(validateRsvp({ ...valid, companions: 11 }).companions).toBe(true);
+  it('should accept a decline without extra guests', () => {
+    expect(validateRsvp({ ...valid, presence: 'no' })).toEqual({});
   });
 });
 
 describe('toRsvpPayload', () => {
-  it('should trim text and drop companions when the guest declines', () => {
-    expect(toRsvpPayload({ ...valid, presence: 'no', companions: 4 })).toEqual({
+  it('should trim the name and the notes', () => {
+    expect(toRsvpPayload({ ...valid, presence: 'no' })).toEqual({
       fullName: 'Ana Souza',
       presence: 'no',
-      companions: 0,
+      notes: 'mesa perto da família',
     });
   });
 

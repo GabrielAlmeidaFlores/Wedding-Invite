@@ -1,5 +1,4 @@
 import { useState, type FormEvent } from 'react';
-import { wedding } from '@/data/wedding';
 import {
   hasRsvpErrors,
   submitRsvp,
@@ -8,18 +7,25 @@ import {
   type Presence,
   type RsvpErrors,
 } from '@/lib/rsvp';
+import { DEFAULT_WEDDING_ID } from '@/lib/backoffice/seed';
+import { isDeadlinePassed } from '@/lib/backoffice/dates';
+import { getWedding } from '@/lib/backoffice/state';
+import { useBackofficeStore } from '@/hooks/use-backoffice-store';
 import { useReveal } from '@/hooks/use-reveal';
+import { useWeddingSite } from '@/hooks/use-wedding-site';
 import { Button } from '@/components/Button';
 import { SectionHeading } from '@/components/SectionHeading';
 
-const COMPANION_MAX = 10;
-
 export function RsvpSection() {
   const ref = useReveal<HTMLElement>();
+  const wedding = useWeddingSite();
+  const snapshot = useBackofficeStore();
   const copy = wedding.rsvp;
+  const record = getWedding(snapshot, DEFAULT_WEDDING_ID);
+  const closed = isDeadlinePassed(record?.rsvpDeadline ?? null, new Date());
   const [fullName, setFullName] = useState('');
   const [presence, setPresence] = useState<Presence | ''>('');
-  const [companions, setCompanions] = useState(0);
+  const [notes, setNotes] = useState('');
   const [errors, setErrors] = useState<RsvpErrors>({});
   const [submitted, setSubmitted] = useState(false);
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
@@ -27,20 +33,19 @@ export function RsvpSection() {
 
   const showErrors = submitted ? errors : {};
 
-  const focusField = (field: 'fullName' | 'presence-yes' | 'companions') => {
+  const focusField = (field: 'fullName' | 'presence-yes') => {
     document.getElementById(field)?.focus();
   };
 
   const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const draft = { fullName, presence, companions };
+    const draft = { fullName, presence, notes };
     const nextErrors = validateRsvp(draft);
     setErrors(nextErrors);
     setSubmitted(true);
     if (hasRsvpErrors(nextErrors)) {
       if (nextErrors.fullName) focusField('fullName');
-      else if (nextErrors.presence) focusField('presence-yes');
-      else focusField('companions');
+      else focusField('presence-yes');
       return;
     }
 
@@ -57,10 +62,6 @@ export function RsvpSection() {
     }
   };
 
-  const changeCompanions = (value: number) => {
-    setCompanions(Math.min(COMPANION_MAX, Math.max(0, value)));
-  };
-
   return (
     <section className="section section-rsvp" id="rsvp" aria-labelledby="rsvp-title" ref={ref}>
       <div className="container container-form">
@@ -71,7 +72,11 @@ export function RsvpSection() {
           lede={copy.lede}
           ornament="none"
         />
-        {status === 'success' ? (
+        {closed ? (
+          <div className="rsvp-success" role="status">
+            <p>O prazo para confirmar presença já encerrou. Qualquer dúvida, fale com os noivos.</p>
+          </div>
+        ) : status === 'success' ? (
           <div className="rsvp-success" role="status">
             <p>{confirmedPresence === 'yes' ? copy.successYes : copy.successNo}</p>
             <Button type="button" variant="ghost" onClick={() => setStatus('idle')}>
@@ -157,48 +162,20 @@ export function RsvpSection() {
               ) : null}
             </fieldset>
 
-            {presence === 'yes' ? (
-              <div className={showErrors.companions ? 'field has-error' : 'field'}>
-                <label htmlFor="companions">{copy.companionsLabel}</label>
-                <p className="field-hint" id="companions-hint">
-                  {copy.companionsHint}
-                </p>
-                <div className="stepper">
-                  <button
-                    type="button"
-                    aria-label="Diminuir acompanhantes"
-                    onClick={() => changeCompanions(companions - 1)}
-                    disabled={companions <= 0}
-                  >
-                    −
-                  </button>
-                  <input
-                    id="companions"
-                    name="companions"
-                    inputMode="numeric"
-                    value={companions}
-                    aria-describedby="companions-hint"
-                    onChange={(event) => {
-                      const parsed = Number.parseInt(event.target.value, 10);
-                      changeCompanions(Number.isNaN(parsed) ? 0 : parsed);
-                    }}
-                  />
-                  <button
-                    type="button"
-                    aria-label="Aumentar acompanhantes"
-                    onClick={() => changeCompanions(companions + 1)}
-                    disabled={companions >= COMPANION_MAX}
-                  >
-                    +
-                  </button>
-                </div>
-                {showErrors.companions ? (
-                  <p className="field-error" role="alert">
-                    {copy.errors.companions}
-                  </p>
-                ) : null}
-              </div>
-            ) : null}
+            <div className="field">
+              <label htmlFor="notes">
+                {copy.notesLabel} <span className="optional">opcional</span>
+              </label>
+              <textarea
+                id="notes"
+                name="notes"
+                rows={4}
+                maxLength={500}
+                placeholder={copy.notesPlaceholder}
+                value={notes}
+                onChange={(event) => setNotes(event.target.value)}
+              />
+            </div>
 
             {status === 'error' ? (
               <p className="field-error" role="alert">

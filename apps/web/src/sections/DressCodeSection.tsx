@@ -1,10 +1,10 @@
-import { wedding } from '@/data/wedding';
 import { useReveal } from '@/hooks/use-reveal';
+import { useWeddingSite } from '@/hooks/use-wedding-site';
 import { SectionHeading } from '@/components/SectionHeading';
 
 export function DressCodeSection() {
   const ref = useReveal<HTMLElement>();
-  const { dressCode } = wedding;
+  const { dressCode } = useWeddingSite();
 
   return (
     <section className="section section-dress" id="dress-code" aria-labelledby="dress-code-title" ref={ref}>
@@ -13,8 +13,8 @@ export function DressCodeSection() {
           <div>
             <SectionHeading titleId="dress-code-title" eyebrow={dressCode.eyebrow} ornament="none" />
             <p className="dress-name">{dressCode.name}</p>
-            {dressCode.description.map((paragraph) => (
-              <p className="lede dress-copy" key={paragraph}>
+            {dressCode.description.map((paragraph, index) => (
+              <p className="lede dress-copy" key={`${index}-${paragraph}`}>
                 {paragraph}
               </p>
             ))}
@@ -33,7 +33,13 @@ export function DressCodeSection() {
           </div>
         ) : null}
       </div>
-      <img className="dress-simba" src="/images/elementos/simba1.webp" alt="" decoding="async" loading="lazy" />
+      <img
+        className={`dress-simba is-${dressCode.artAlign}`}
+        src={dressCode.art}
+        alt=""
+        decoding="async"
+        loading="lazy"
+      />
     </section>
   );
 }

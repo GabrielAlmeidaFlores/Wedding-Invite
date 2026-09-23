@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react';
 import { wedding } from '@/data/wedding';
 import { useAlbum } from '@/hooks/use-album';
+import { useWeddingSite } from '@/hooks/use-wedding-site';
 import { useReveal } from '@/hooks/use-reveal';
 import { Button } from '@/components/Button';
 import { Icon } from '@/components/Icon';
@@ -13,6 +14,7 @@ export function AlbumSection() {
   const { photos, addFiles, removePhoto } = useAlbum();
   const [activeId, setActiveId] = useState<string | null>(null);
   const copy = wedding.album;
+  const albumArt = useWeddingSite().album.art;
 
   return (
     <section className="section section-album" id="album" aria-labelledby="album-title" ref={ref}>
@@ -65,7 +67,7 @@ export function AlbumSection() {
           </ul>
         )}
       </div>
-      <img className="album-simba" src="/images/elementos/simba2.webp" alt="" decoding="async" loading="lazy" />
+      <img className="album-simba" src={albumArt} alt="" decoding="async" loading="lazy" />
       <Lightbox photos={photos} activeId={activeId} onClose={() => setActiveId(null)} onSelect={setActiveId} />
     </section>
   );

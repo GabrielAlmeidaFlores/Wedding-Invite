@@ -335,15 +335,8 @@ svg.icon {
   font-size: clamp(1.2rem, 2.5vw, 1.65rem);
   font-weight: 400;
   line-height: 1.55;
+  white-space: pre-line;
   text-wrap: balance;
-}
-
-.wedding-quote footer {
-  margin-top: 0.9rem;
-  font-family: var(--font-serif);
-  font-size: clamp(1.05rem, 2vw, 1.35rem);
-  font-weight: 400;
-  line-height: 1.4;
 }
 
 .section-wedding::before {
@@ -375,8 +368,14 @@ svg.icon {
   position: relative;
 }
 
-.section-gifts .container {
-  padding-bottom: 6.5rem;
+.section-gifts .gifts-catalog-wrap {
+  padding-bottom: 7.5rem;
+}
+
+.gift-catalog-empty {
+  margin: 2.5rem 0 0;
+  text-align: center;
+  color: var(--navy);
 }
 
 .gifts-present {
@@ -407,11 +406,23 @@ svg.icon {
 
 .dress-simba {
   position: absolute;
-  right: 0.35rem;
   bottom: 0;
   width: 7.475rem;
   height: auto;
   pointer-events: none;
+}
+
+.dress-simba.is-left {
+  left: 0.35rem;
+}
+
+.dress-simba.is-center {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.dress-simba.is-right {
+  right: 0.35rem;
 }
 
 .section-dress .dress-layout {
@@ -656,6 +667,13 @@ svg.icon {
   line-height: 1.35;
 }
 
+.gift-card-description {
+  margin: 0;
+  color: rgba(2, 52, 91, 0.78);
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+
 .gift-card-price {
   margin: 0;
   color: var(--navy);
@@ -758,13 +776,15 @@ svg.icon {
 .countdown {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  width: min(100%, 24rem);
+  width: 100%;
   margin: 0 auto;
 }
 
 .countdown-item {
-  padding: 0.1rem 0.35rem 0;
+  min-width: 0;
+  padding: 0.1rem 0.2rem 0;
   text-align: center;
+  container-type: inline-size;
 }
 
 .countdown-item + .countdown-item {
@@ -773,23 +793,27 @@ svg.icon {
 
 .countdown-item strong {
   display: block;
+  max-width: 100%;
   color: var(--navy);
   font-family: "Cormorant Garamond", Palatino, serif;
-  font-size: clamp(2.6rem, 9vw, 3.35rem);
+  font-size: clamp(1.15rem, 34cqi, 3.35rem);
   font-weight: 500;
   font-variant-numeric: lining-nums tabular-nums;
   line-height: 1;
+  white-space: nowrap;
 }
 
 .countdown-item span {
   display: block;
+  max-width: 100%;
   margin-top: 0.35rem;
   color: var(--navy);
   font-family: "Cormorant Garamond", Palatino, serif;
-  font-size: 1.05rem;
+  font-size: clamp(0.68rem, 20cqi, 1.05rem);
   font-weight: 500;
   letter-spacing: 0.01em;
   line-height: 1.2;
+  white-space: nowrap;
 }
 
 .countdown-done {
@@ -1390,8 +1414,12 @@ fieldset.has-error .choice {
 }
 
 @media (min-width: 960px) {
-  .section-gifts .container {
-    padding-bottom: 0;
+  .wedding-quote p {
+    font-size: clamp(calc(1.2rem * 0.85), calc(2.5vw * 0.85), calc(1.65rem * 0.85));
+  }
+
+  .section-gifts .gifts-catalog-wrap {
+    padding-bottom: 9rem;
   }
 
   .gifts-present {

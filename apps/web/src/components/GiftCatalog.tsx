@@ -1,9 +1,13 @@
-import { wedding } from '@/data/wedding';
+import { useWeddingSite } from '@/hooks/use-wedding-site';
 import { formatGiftPrice } from '@/lib/gift-price';
 import { Button } from '@/components/Button';
 
 export function GiftCatalog() {
-  const { gifts } = wedding;
+  const { gifts } = useWeddingSite();
+
+  if (gifts.items.length === 0) {
+    return <p className="gift-catalog-empty">Nenhum presente disponível no momento.</p>;
+  }
 
   return (
     <ul className="gift-catalog">
@@ -25,10 +29,19 @@ export function GiftCatalog() {
             </div>
             <div className="gift-card-body">
               <h4>{item.name}</h4>
-              <p className="gift-card-price">{formatGiftPrice(item.priceCents)}</p>
-              <Button className="gift-card-give" type="button" fullWidth>
-                {gifts.giveLabel}
-              </Button>
+              {item.description ? <p className="gift-card-description">{item.description}</p> : null}
+              {item.priceCents === undefined ? null : (
+                <p className="gift-card-price">{formatGiftPrice(item.priceCents)}</p>
+              )}
+              {item.link ? (
+                <Button className="gift-card-give" href={item.link} target="_blank" rel="noreferrer" fullWidth>
+                  {gifts.giveLabel}
+                </Button>
+              ) : (
+                <Button className="gift-card-give" type="button" fullWidth>
+                  {gifts.giveLabel}
+                </Button>
+              )}
             </div>
           </article>
         </li>

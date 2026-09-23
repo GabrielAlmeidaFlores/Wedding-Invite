@@ -1,4 +1,4 @@
-type IconName = 'image' | 'close' | 'chevron-left' | 'chevron-right';
+type IconName = 'image' | 'close' | 'chevron-left' | 'chevron-right' | 'logout';
 
 type IconProps = {
   name: IconName;
@@ -11,6 +11,7 @@ const paths: Record<IconName, string> = {
   close: 'M6.3 6.3 12 12m0 0 5.7 5.7M12 12 6.3 17.7M12 12l5.7-5.7',
   'chevron-left': 'M14.5 6.5 9 12l5.5 5.5',
   'chevron-right': 'M9.5 6.5 15 12l-5.5 5.5',
+  logout: 'M10 7V6.2A1.2 1.2 0 0 0 8.8 5H6.2A1.2 1.2 0 0 0 5 6.2v11.6A1.2 1.2 0 0 0 6.2 19h2.6A1.2 1.2 0 0 0 10 17.8V17M13 12h6M16.5 8.5 20 12l-3.5 3.5',
 };
 
 export function Icon({ name, className }: IconProps) {

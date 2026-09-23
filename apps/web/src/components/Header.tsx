@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react';
-import { sectionIds, wedding } from '@/data/wedding';
+import { sectionIds } from '@/data/wedding';
+import { useWeddingSite } from '@/hooks/use-wedding-site';
 import { useActiveSection } from '@/hooks/use-active-section';
 import { useMediaQuery } from '@/hooks/use-media-query';
 
 const DESKTOP_NAV = '(min-width: 960px)';
 
 export function Header() {
+  const wedding = useWeddingSite();
   const active = useActiveSection(sectionIds);
   const isDesktop = useMediaQuery(DESKTOP_NAV);
   const [open, setOpen] = useState(false);
@@ -92,7 +94,7 @@ export function Header() {
         <a className="brand" href="#inicio" onClick={closeMenu}>
           <img
             className="brand-logo"
-            src="/images/elementos/logo-principal.svg"
+            src={wedding.logoUrl}
             alt={wedding.monogram}
           />
         </a>

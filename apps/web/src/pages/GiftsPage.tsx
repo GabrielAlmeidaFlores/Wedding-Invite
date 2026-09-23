@@ -1,17 +1,18 @@
-import { wedding } from '@/data/wedding';
+import { useWeddingSite } from '@/hooks/use-wedding-site';
 import { GiftCatalog } from '@/components/GiftCatalog';
 import { SectionHeading } from '@/components/SectionHeading';
 import { SiteCredit } from '@/components/SiteCredit';
 import { ClosingSection } from '@/sections/ClosingSection';
 
 export function GiftsPage() {
+  const wedding = useWeddingSite();
   const { gifts } = wedding;
 
   return (
     <>
       <header className="page-bar">
         <a className="brand" href="/">
-          <img className="brand-logo" src="/images/elementos/logo-principal.svg" alt={wedding.monogram} />
+          <img className="brand-logo" src={wedding.logoUrl} alt={wedding.monogram} />
         </a>
         <a className="page-back" href="/">
           Voltar ao convite
